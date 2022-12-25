@@ -1,37 +1,10 @@
-package utils; /** Simple yet moderately fast I/O routines.
- *
- * Example usage:
- *
- * FastIO io = new FastIO(System.in, System.out);
- *
- * while (io.hasMoreTokens()) {
- *    int n = io.getInt();
- *    double d = io.getDouble();
- *    double ans = d*n;
- *
- *    io.println("Answer: " + ans);
- * }
- *
- * io.close();
- *
- *
- * Some notes:
- *
- * - When done, you should always do io.close() or io.flush() on the
- *   Kattio-instance, otherwise, you may lose output.
- *
- * - The getInt(), getDouble(), and getLong() methods will throw an
- *   exception if there is no more data in the input, so it is generally
- *   a good idea to use hasMoreTokens() to check for end-of-file.
- */
+package utils;
 
 import java.io.*;
 import java.util.StringTokenizer;
 
 public class FastIO extends PrintWriter {
-
-    private BufferedReader reader;
-    private String line;
+    private final BufferedReader reader;
     private StringTokenizer st;
     private String token;
 
@@ -71,8 +44,7 @@ public class FastIO extends PrintWriter {
 
     public short nextShort() { return Short.parseShort(nextToken()); }
 
-    public char nextChar() throws IOException {
-        System.out.println(nextToken().charAt(0)); return (char) reader.read(); }
+    public char nextChar() throws IOException { return (char) reader.read(); }
 
     public String nextWord() { return nextToken(); }
 
@@ -100,7 +72,7 @@ public class FastIO extends PrintWriter {
         if (token == null)
             try {
                 while (st == null || !st.hasMoreTokens()) {
-                    line = reader.readLine();
+                    String line = reader.readLine();
                     if (line == null) return null;
                     st = new StringTokenizer(line);
                 }
